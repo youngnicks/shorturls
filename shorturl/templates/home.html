@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}
+	Home
+{% endblock pagetitle %}
+
+{% block primary %}
+	<form action="{% url "create_link" %}" method="post" class="form-inline">
+		{% csrf_token %}
+		<div class="form-group">
+			<label class="sr-only" for="id_url">Paste a link to shorten it</label>
+			<input id="id_url" maxlength="200" name="url" type="text" class="form-control" placeholder="Paste a link to shorten it">
+		</div>
+		<button type="submit" class="btn btn-primary">Shorten</button>
+	</form>
+
+	<table class="table table-hover">
+		<h2>Current Links</h2>
+		<tr>
+			<th>Link</th>
+			<th>URL</th>
+			<th></th>
+		</tr>
+		{% for link in links %}
+			<tr>
+				<td>
+					<a href="{% url "redirect_link" slug=link.slug %}">
+						http://{{ current_site }}/{{ link.slug }}
+					</a>
+				</td>
+				<td><a href="{{ link.url }}">{{ link.url }}</a></td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock primary %}

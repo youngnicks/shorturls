@@ -12,7 +12,7 @@ class CreateLinkView(CreateView):
     """
     template_name = 'create_link.html'
     form_class = LinkForm
-    success_url = reverse_lazy('create_link')
+    success_url = reverse_lazy('home')
 
 
 class RedirectLinkView(RedirectView):

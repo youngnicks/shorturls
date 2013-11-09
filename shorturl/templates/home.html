@@ -19,6 +19,7 @@
 		<tr>
 			<th>Link</th>
 			<th>URL</th>
+			<th>Hit Count</th>
 			<th></th>
 		</tr>
 		{% for link in links %}
@@ -29,6 +30,7 @@
 					</a>
 				</td>
 				<td><a href="{{ link.url }}">{{ link.url }}</a></td>
+				<td>{{ link.hit_count }}</td>
 				<td>
 					<a href="{% url "delete_link" slug=link.slug %}">Delete</a>
 				</td>

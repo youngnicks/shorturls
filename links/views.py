@@ -30,7 +30,10 @@ class RedirectLinkView(RedirectView):
     """
     A view to lookup a Link and redirect to its URL.
     """
+    permanent = False
+
     def get_redirect_url(self, *args, **kwargs):
         link = get_object_or_404(Link, slug=kwargs['slug'])
+        link.update_counter()
         self.url = link.url
         return super(RedirectLinkView, self).get_redirect_url(*args, **kwargs)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
+from django.db.models import F
 
 
 @python_2_unicode_compatible
@@ -10,9 +11,14 @@ class Link(models.Model):
     """
     slug = models.SlugField(primary_key=True)
     url = models.URLField()
+    hit_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.url
+
+    def update_counter(self):
+        self.hit_count = F('hit_count') + 1
+        self.save(update_fields=['hit_count'])
 
     def save(self, *args, **kwargs):
         """

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Site - {% block pagetitle %}{% endblock pagetitle %}</title>
+
+	{% load staticfiles %}
+	<!-- Bootstrap core CSS -->
+	<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+	<!-- Custom styles -->
+	<link href="{% static "css/main.css" %}" rel="stylesheet">
+	{% block css %}{% endblock css %}
+
+	<!-- IE Fixes -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<header class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">URL Shortener</a>
+			</div>
+			{% if user.is_authenticated %}
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{% url "logout" %}">Logout</a></li>
+				</ul>
+			{% endif %}
+		</div>
+	</header>
+
+	<section id="main" class="container">
+		{% block primary %}{% endblock primary %}
+	</section>
+
+	<!-- Javascript -->
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{% static "js/bootstrap.min.js" %}"></script>
+	{% block js %}{% endblock js %}
+</body>
+</html>

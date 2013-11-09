@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}
+	Create Link
+{% endblock pagetitle %}
+
+{% block primary %}
+	<form action="{% url "create_link" %}" method="post" class="form-inline">
+		{% csrf_token %}
+		{{ form.non_field_errors }}
+		<div class="form-group">
+			<label class="sr-only" for="id_url">Enter a link to shorten it.</label>
+			<input id="id_url" maxlength="200" name="url" type="text" class="form-control" placeholder="Paste a link to shorten it">
+		</div>
+		<button type="submit" class="btn btn-primary">Shorten</button>
+		{% if form.url.errors %}
+			<ul class="list-unstyled">
+			{% for error in form.url.errors %}
+				<li><strong>{{ error|escape }}</strong></li>
+			{% endfor %}
+		{% endif %}
+{% endblock primary %}

@@ -29,6 +29,9 @@
 					</a>
 				</td>
 				<td><a href="{{ link.url }}">{{ link.url }}</a></td>
+				<td>
+					<a href="{% url "delete_link" slug=link.slug %}">Delete</a>
+				</td>
 			</tr>
 		{% endfor %}
 	</table>
